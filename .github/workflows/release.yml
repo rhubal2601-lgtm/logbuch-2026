@@ -43,13 +43,14 @@ jobs:
           node <<'NODE'
           const fs = require('fs');
           const app = fs.readFileSync('app.js', 'utf8');
-          const equipment = app.match(/const baseEquipment=\[([\s\S]*?)\]\.map\(/);
-          const makers = app.match(/const manufacturers=\[([\s\S]*?)\];/);
-          if (!equipment || !makers) throw new Error('Seed data definitions missing');
-          const equipmentCount = (equipment[1].match(/\["/g) || []).length;
+          const base = app.match(/const baseEquipment=\\[([\\s\\S]*?)\\]\\.map\\(/);
+          const extra = app.match(/const expandedEquipment=\\[([\\s\\S]*?)\\]\\.map\\(/);
+          const makers = app.match(/const manufacturers=\\[([\\s\\S]*?)\\];/);
+          if (!base || !extra || !makers) throw new Error('Seed data definitions missing');
+          const equipmentCount = (base[1].match(/\\["/g) || []).length + (extra[1].match(/\\["/g) || []).length;
           const makerCount = (makers[1].match(/"/g) || []).length / 2;
-          if (equipmentCount < 45) throw new Error('Expected at least 45 base equipment entries; found ' + equipmentCount);
-          if (makerCount < 40) throw new Error('Expected at least 40 manufacturer entries; found ' + makerCount);
+          if (equipmentCount < 170) throw new Error('Expected at least 170 equipment entries; found ' + equipmentCount);
+          if (makerCount < 60) throw new Error('Expected at least 60 manufacturer entries; found ' + makerCount);
           console.log('Seed data OK: ' + equipmentCount + ' equipment entries, ' + makerCount + ' manufacturer entries');
           NODE
 
