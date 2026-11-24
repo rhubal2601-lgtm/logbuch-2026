@@ -110,10 +110,10 @@ function equipmentMuscles(e){
  if(Array.isArray(e.muscleGroups))return stored;
  const raw=[e.muscle,e.type,e.name,e.category].filter(Boolean).join(" ").toLowerCase(),out=new Set();
  const add=(m,re)=>{if(re.test(raw))out.add(m)};
- add("Brust",/brust|chest|pec|butterfly|flystation|bench press/);add("Rücken",/r[üu]cken|back|lat\b|pulldown|pull.?down|row|rud(er|ern)|klimmzug|chin.?up|pullover|shrug/);
- add("Schultern",/schulter|shoulder|delt|lateral raise|rear delt|reverse butterfly|trapez/);add("Bizeps",/bizeps|biceps|curl|scott|preacher/);add("Trizeps",/trizeps|triceps|dip.?maschine|triceps extension/);
+ if(/brust|chest|pec|flystation|bench press|butterfly/.test(raw)&&!/brustgestütz|chest supported row|reverse butterfly/.test(raw))out.add("Brust");add("Rücken",/r[üu]cken|back|lat\b|pulldown|pull.?down|row|rud(er|ern)|klimmzug|chin.?up|pullover|shrug/);
+ add("Schultern",/schulter|shoulder|delt|lateral raise|rear delt|reverse butterfly|trapez/);add("Bizeps",/bizeps|biceps|scott|preacher|bicep.?curl|arm.?curl/);add("Trizeps",/trizeps|triceps|dip.?maschine|dipstation|dip.?barren|triceps extension/);
  add("Quadrizeps",/quadrizeps|beinpresse|leg press|hackenschmidt|hack squat|pendulum|squat|kniebeuge|beinstrecker|leg extension|belt squat/);
- add("Beinbeuger",/beinbeuger|hamstring|leg curl|nordic|glute ham|g.h.d|rum[äa]nisch/);add("Gesäß",/ges[äa]ß|glute|hip thrust|kickback|abduktion|hip abduction/);
+ add("Beinbeuger",/beinbeuger|hamstring|leg curl|nordic|glute ham|g.h.d|rum[äa]nisch/);add("Gesäß",/ges[äa]ß|glute|hip thrust|kickback|abduk|abduct/);
  add("Adduktoren",/adduktor|adductor|hip adduction/);add("Waden",/wade|calf|tibialis/);add("Bauch",/bauch|ab crunch|crunch|core|ab wheel|torso rotation/);add("Unterarme",/unterarm|forearm|wrist curl|grip trainer/);
  if(out.size)return [...out];
  if(/kabel|cable|kurzhantel|dumbbell|langhantel|barbell|kettlebell|smith|multipresse|power rack|squat rack|functional trainer|verstellbare trainingsbank|hantelbank|turnringe|schlingentrainer/.test(raw))return all;
