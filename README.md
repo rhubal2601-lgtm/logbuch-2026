@@ -26,7 +26,7 @@ GitHub Pages kann die Dateien statisch bereitstellen: Repository-Einstellungen �
 
 ## Nutzung
 
-Die Navigation ist in fünf Bereiche gegliedert: **Home**, **Plan**, **Analyse**, **Verlauf** und **Mehr**. Die Gerätebibliothek ist über **Mehr → Geräte verwalten** erreichbar.
+Die Navigation ist in fünf Bereiche gegliedert: **Home**, **Plan**, **Analyse**, **Verlauf** und **Mehr**. Die Gerätebibliothek ist über **Mehr → Trainingsgeräte → Gerätebibliothek öffnen** erreichbar. Sie ist studio- und herstellerunabhängig.
 
 1. Unter **Mehr** Profile anlegen oder wechseln, die Gerätebibliothek mit fünf Kategorien durchsuchen und bei Bedarf eigene Geräte sowie individuelle Einstellungen erfassen.
 2. Unter **Plan** einen der fünf Split-Pläne als Vorlage hinzufügen oder eigene Pläne und Trainingstage erstellen.
@@ -40,7 +40,7 @@ Abgeschlossene Trainings werden als Datensatz gespeichert. Änderungen an späte
 
 Daten bleiben auf dem Gerät und im jeweiligen Browserprofil. IndexedDB (`logbook-local`) ist der primäre Speicher. Beim Start wird der neueste bestätigte Stand aus IndexedDB und `localStorage` gewählt; fehlt ein IndexedDB-Stand, werden vorhandene lokale Daten übernommen. Änderungen werden zuerst in IndexedDB gespeichert; `localStorage` dient als lokale Wiederherstellungskopie und Fallback. Ist IndexedDB nicht verfügbar, läuft die App mit `localStorage` weiter. Beim ersten Start mit einer älteren logbook-Version werden vorhandene Version-1-Daten in die profilbezogene Struktur übernommen; der alte Schlüssel bleibt erhalten.
 
-Profile besitzen getrennte Pläne, Übungen, Gerätekonfigurationen, Favoriten, Gewichtsverläufe, Trainingseinheiten und aktive Trainingsentwürfe. Die Geräte-Grundbibliothek enthält bei einer Neuinstallation 52 allgemeine Gerätetypen in den Kategorien Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör. Sie wird bei vorhandenen Profilen ergänzend eingespielt, ohne eigene Geräte zu überschreiben. Hersteller können gesucht und beim Anlegen eines eigenen Geräts frei ergänzt werden. Es gibt keine automatische Synchronisierung zwischen Geräten. Zum Gerätewechsel in **Verwaltung** ein JSON-Backup exportieren und am Zielgerät importieren. Der Import prüft Version, Profile, IDs und Trainingseinheiten, bevor er den aktuellen lokalen Datenbestand ersetzt.
+Profile besitzen getrennte Pläne, Übungen, Gerätekonfigurationen, Favoriten, Gewichtsverläufe, Trainingseinheiten und aktive Trainingsentwürfe. Die Geräte-Grundbibliothek enthält mehr als 170 allgemeine Gerätetypen in den Kategorien Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör. Sie wird bei vorhandenen Profilen ergänzend eingespielt, ohne eigene Geräte zu überschreiben. Hersteller und Modelle können frei eingetragen werden; die Bibliothek ist nicht an ein bestimmtes Studio gebunden. Es gibt keine automatische Synchronisierung zwischen Geräten. Zum Gerätewechsel in **Verwaltung** ein JSON-Backup exportieren und am Zielgerät importieren. Der Import prüft Version, Profile, IDs und Trainingseinheiten, bevor er den aktuellen lokalen Datenbestand ersetzt.
 
 Browserdaten löschen, privater Modus, Geräteverlust oder Browserwechsel können lokale Daten entfernen. Regelmäßig ein JSON-Backup an einem selbst gewählten sicheren Ort ablegen.
 
