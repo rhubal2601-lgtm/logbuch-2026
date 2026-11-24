@@ -22,7 +22,7 @@ Anschließend `http://localhost:8000` öffnen. `file://` reicht für den Service
 - **Android:** Seite in Chrome über HTTPS öffnen, Browsermenü öffnen und **App installieren** wählen. Der Menüpunkt kann je nach Browserversion anders heißen.
 - **Desktop:** In einem kompatiblen Browser das Installationssymbol in der Adressleiste oder das Browsermenü verwenden.
 
-GitHub Pages kann die Dateien statisch bereitstellen: Repository-Einstellungen → **Pages** → Hauptbranch und Stammverzeichnis wählen. GitHub Pages liefert HTTPS automatisch aus.
+GitHub Pages kann die Dateien statisch bereitstellen: Repository-Einstellungen → **Pages** → Hauptbranch und Stammverzeichnis wählen. GitHub Pages liefert HTTPS automatisch aus. Der GitHub-Actions-Workflow **Logbook Release Build** prüft bei jedem Push auf `main` die JavaScript-Syntax, das Manifest, die Grunddatenbank und erstellt ein ZIP-Artefakt. Das ZIP findest du nach erfolgreichem Lauf unter **Actions → Logbook Release Build → Artifacts → logbook-release**.
 
 ## Nutzung
 
