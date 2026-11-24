@@ -1,0 +1,70 @@
+name: Logbook Release Build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check sw.js
+
+      - name: Validate manifest
+        run: node -e "const fs=require('fs'); const m=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8')); if(!m.name || !m.start_url || !m.icons?.length) process.exit(1); console.log('Manifest OK')"
+
+      - name: Check required app files
+        run: |
+          test -s index.html
+          test -s app.js
+          test -s sw.js
+          test -s manifest.webmanifest
+          test -s icon.svg
+          test -s README.md
+          test -s TESTBERICHT.md
+
+      - name: Check seeded equipment and manufacturers
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const app = fs.readFileSync('app.js', 'utf8');
+          const equipment = app.match(/const baseEquipment=\[([\s\S]*?)\]\.map\(/);
+          const makers = app.match(/const manufacturers=\[([\s\S]*?)\];/);
+          if (!equipment || !makers) throw new Error('Seed data definitions missing');
+          const equipmentCount = (equipment[1].match(/\["/g) || []).length;
+          const makerCount = (makers[1].match(/"/g) || []).length / 2;
+          if (equipmentCount < 45) throw new Error('Expected at least 45 base equipment entries; found ' + equipmentCount);
+          if (makerCount < 40) throw new Error('Expected at least 40 manufacturer entries; found ' + makerCount);
+          console.log('Seed data OK: ' + equipmentCount + ' equipment entries, ' + makerCount + ' manufacturer entries');
+          NODE
+
+      - name: Create release ZIP
+        run: |
+          mkdir -p dist
+          zip -j dist/logbook-release.zip index.html app.js sw.js manifest.webmanifest icon.svg README.md TESTBERICHT.md
+
+      - name: Verify ZIP
+        run: unzip -t dist/logbook-release.zip
+
+      - name: Upload release ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: logbook-release
+          path: dist/logbook-release.zip
+          if-no-files-found: error
+          retention-days: 30
