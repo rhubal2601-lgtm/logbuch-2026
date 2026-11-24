@@ -107,11 +107,11 @@ function addExerciseModal(){modal("Neue Übung",exerciseForm());wireExerciseForm
 function renderEquipment(){
  const p=profile(),all=p.equipment||[],q=($("#equipmentSearch")?.value||"").trim().toLowerCase(),categories=["Freihanteln","Maschinen","Kabelzüge","Körpergewicht","Sonstiges Zubehör"];
  const card=e=>`<div class="item equipment-card"><button class="equipment-main" data-eq-detail="${esc(e.id)}"><b>${esc(e.name||e.model||"Gerät")}</b><small>${esc([e.manufacturer,e.model].filter(Boolean).join(" · ")||e.type||e.category||"Allgemeines Trainingsgerät")}</small></button><button class="equipment-fav" data-eq-fav="${esc(e.id)}">${e.favorite?"★":"☆"}</button></div>`;
- $("#equipmentCategories").innerHTML=categories.map((c,i)=>`<button class="equipment-category" data-eq-category="${esc(c)}"><span>${["🏋️","⚙️","〰️","🤸","＋"][i]}</span><b>${esc(c)}</b><small>${all.filter(e=>e.category===c).length} Geräte</small></button>`).join("");
+ $("#equipmentCategories").innerHTML=categories.map((c,i)=>`<button type="button" class="equipment-category" data-eq-category="${esc(c)}"><span>${["🏋️","⚙️","〰️","🤸","＋"][i]}</span><b>${esc(c)}</b><small>${all.filter(e=>e.category===c).length} Geräte</small></button>`).join("");
  const filtered=q?all.filter(e=>[e.name,e.manufacturer,e.model,e.type,e.category].join(" ").toLowerCase().includes(q)):all.filter(e=>e.category===equipmentCategory);
  if(q||equipmentCategory){$("#equipmentHome").classList.add("hidden");$("#equipmentCategoryView").classList.remove("hidden");$("#equipmentCategoryTitle").textContent=q?"Suchergebnisse":equipmentCategory;$("#equipmentList").innerHTML=filtered.map(card).join("")||'<p class="small muted">Keine passenden Geräte gefunden.</p>'}
  else{$("#equipmentHome").classList.remove("hidden");$("#equipmentCategoryView").classList.add("hidden");$("#equipmentFavorites").innerHTML=all.filter(e=>e.favorite).slice(0,8).map(card).join("")||'<p class="small muted">Noch keine Favoriten markiert.</p>';$("#equipmentRecent").innerHTML=all.filter(e=>e.lastUsedAt).sort((a,b)=>b.lastUsedAt-a.lastUsedAt).slice(0,6).map(card).join("")||'<p class="small muted">Zuletzt verwendete Geräte erscheinen hier.</p>'}
- $$("[data-eq-category]").forEach(b=>b.onclick=()=>{equipmentCategory=b.dataset.eqCategory;renderEquipment()});
+ $("[data-eq-category]").forEach(b=>b.onclick=()=>{equipmentCategory=b.dataset.eqCategory;$("#equipmentSearch").value="";renderEquipment()});
  $$("[data-eq-detail]").forEach(b=>b.onclick=()=>equipmentDetail(b.dataset.eqDetail));
  $$("[data-eq-fav]").forEach(b=>b.onclick=()=>{const e=all.find(x=>x.id===b.dataset.eqFav);if(e){e.favorite=!e.favorite;save();renderEquipment()}});
  $("#equipmentBack").onclick=()=>{equipmentCategory="";$("#equipmentSearch").value="";renderEquipment()};
