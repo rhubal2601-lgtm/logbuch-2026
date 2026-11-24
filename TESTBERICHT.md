@@ -6,10 +6,11 @@ Stand: 24.11.2026
 
 Geprüfter Branch: `main`
 
-- Die Geräte-Grunddatenbank enthält 52 allgemeine Gerätetypen in fünf Kategorien: Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör.
-- Die Herstellerliste ist im Quellcode hinterlegt; eigene Hersteller- und Modellangaben bleiben möglich.
+- Die Geräte-Grunddatenbank enthält 184 allgemeine Gerätetypen in fünf Kategorien (24 Freihantel-, 80 Maschinen-, 26 Kabelzug-, 19 Körpergewichts- und 35 Zubehör-Einträge): Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör.
+- Die Herstellerliste enthält 63 Marken-/Herstellereinträge im Quellcode; eigene Hersteller- und Modellangaben bleiben möglich.
 - Der Grundbestand wird beim Normalisieren vorhandener Profile ergänzt, ohne Einträge mit bereits vorhandenen IDs zu duplizieren.
 - Die Gerätebibliothek besitzt eine Kachel-Startansicht, Kategorie-/Suchlisten, Favoriten und eine separate Detailansicht.
+- Die Kategorieauswahl initialisiert ihren Zustand explizit; beim Öffnen einer Kategorie wird ein vorheriger Suchfilter zurückgesetzt.
 - IndexedDB wird als primärer Speicher verwendet; localStorage bleibt Wiederherstellungskopie und Fallback.
 - Der Service-Worker-Cache wurde auf `logbook-cache-v4` angehoben, damit zuvor zwischengespeicherte App-Dateien beim nächsten erfolgreichen Laden ersetzt werden.
 - Ein GitHub-Actions-Workflow unter `.github/workflows/release.yml` prüft Quellcode und Manifest, kontrolliert Mindestbestände der Geräte- und Herstellerdaten und erstellt ein ZIP-Artefakt.
