@@ -2,31 +2,38 @@
 
 Stand: 24.11.2026
 
-## In dieser Arbeitsumgebung ausgeführt
+## In dieser Revision umgesetzt
 
-- Darstellungsänderungen in den Designbereichen der `index.html` und den zwei Canvas-Zeichenfunktionen in `app.js` gebündelt. Navigation, Training, Profile, Persistenz, Migration und Backupfunktionen wurden nicht umgebaut.
-- Prüfsummenvergleich der bisherigen Release-Fassung gegen die aktuelle `app.js` – geprüft, dass Unterschiede auf die Zeichenfunktionen der Diagramme begrenzt sind.
-- JavaScript-Syntax von `app.js` und `sw.js` sowie JSON-Syntax des Manifests – erfolgreich.
-- Statische Prüfung der fünf `data-page`-Navigationsziele, relevanten Trainings-/Verwaltungsbereiche, SVG-Iconstruktur und responsiven Breakpoints – erfolgreich.
-- `node --check app.js` – erfolgreich.
-- `node --check sw.js` – erfolgreich.
-- `manifest.webmanifest` – als JSON eingelesen, erfolgreich.
-- Statische Strukturprüfung – fünf Hauptnavigationseinträge, fünf Splitvorlagen, die Bereiche Planeditor, Übungsbibliothek, aktive Einheit, Analyse, Verlauf, Geräteverwaltung und Profile sind im Quellstand vorhanden.
-- Service-Worker-Prüfung – Installations-Cache enthält Startseite, App-Skript, Manifest und Icon; Navigationsanfragen haben einen Cache-Fallback. Dies ist eine Quellprüfung, kein tatsächlicher Offlineaufruf.
-- Release-ZIP – nach den Quelländerungen neu erstellt, Dateiliste und Größen gegen die Projektdateien verglichen und ZIP-Integrität geprüft.
+- Geräte-Grundbestand mit 52 allgemeinen Gerätetypen in fünf Kategorien ergänzt: Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör.
+- Grundbestand wird bei Neuinstallation angelegt und bei bestehenden Profilen rückwärtskompatibel ergänzt. Vorhandene individuelle Geräte bleiben erhalten; bestehende Einträge ohne Kategorie werden unter „Sonstiges Zubehör“ einsortiert.
+- Herstellerliste erweitert und Hersteller-Suche ergänzt. Freie Hersteller- und Modellangaben bleiben möglich.
+- Gerätebibliothek auf Kachel-Startansicht, Kategorie-/Suchliste, Favoriten und separate Detailansicht umgestellt.
+- Individuelle Geräteeinstellungen, profilbezogene Favoriten und die optionale Übungszuordnung bleiben Bestandteil der bestehenden Datenstruktur.
+- Speicherreihenfolge angepasst: IndexedDB wird zuerst beschrieben; localStorage dient als Wiederherstellungskopie und Fallback.
+- GitHub Actions Workflow ergänzt, der JavaScript-Syntax, Manifest-JSON und ZIP-Integrität prüft und ein Release-ZIP als Build-Artefakt bereitstellt.
 
-## Nicht ausgeführt / nicht bestätigt
+## Noch automatisiert zu bestätigen
 
-- Kein visueller Browservergleich der fertigen App mit der Referenz; die Computer-Use-Umgebung konnte die lokale Browser-URL nicht sicher bestimmen.
-- Ein interaktiver Browser-Smoke-Test konnte nicht gestartet werden. Der lokale Testserver war aus der Browserumgebung nicht erreichbar (`ERR_CONNECTION_TIMED_OUT`).
-- Kein realer Offline-Neustart mit zuvor installiertem Service Worker.
-- Keine Installation oder Bedienprüfung auf iPhone, iPad oder Android-Gerät.
-- Keine Prüfung der nativen PWA-Installationsdialoge.
-- Keine automatisierte Ende-zu-Ende-Prüfung von Training anlegen/abschließen, Profilwechsel, Backup-Import/Export oder IndexedDB-Wiederherstellung in einem echten Browser.
+Der GitHub-Actions-Build wird durch den Push auf den Branch `finish-logbook` gestartet. Erst nach erfolgreichem Workflow gelten die folgenden Prüfungen als bestanden:
 
-## Bekannte Einschränkungen
+- `node --check app.js`
+- `node --check sw.js`
+- Manifest als JSON lesbar
+- ZIP-Erstellung und ZIP-Integrität
 
-- Speicherung gilt nur für das jeweilige Browserprofil und Gerät. Es gibt keine geräteübergreifende Synchronisierung.
-- Wenn IndexedDB vom Browser blockiert oder deaktiviert wird, verwendet die App `localStorage` als Fallback; dadurch gelten dessen Speichergrenzen.
-- GitHub-Pages-Bereitstellung, iOS-/Android-Installation und Offlinefunktion müssen vor einer öffentlichen Release auf Zielgeräten praktisch bestätigt werden.
-- Der Server- und Browser-Testblocker in dieser Umgebung lässt visuelle und interaktive Regressionen offen. Die Syntax- und Paketprüfung ersetzt diese Tests nicht.
+## Nicht tatsächlich geprüft
+
+- Interaktive Bedienung in einem echten Browser.
+- Tatsächliche IndexedDB-Persistenz nach Browserneustart und bei blockiertem localStorage.
+- JSON-Dateidialoge und Wiederherstellung echter Nutzerdaten.
+- Service-Worker-Offlinebetrieb nach echtem Neustart.
+- PWA-Installation und Bedienung auf iPhone, iPad und Android.
+- Responsive Darstellung auf physischen Geräten.
+- Visuelle Übereinstimmung mit sämtlichen ursprünglichen Designreferenzen.
+
+## Hinweise vor dem produktiven Einsatz
+
+- Vor dem ersten Update auf bestehende Nutzerdaten ein JSON-Backup exportieren.
+- Die App speichert lokal pro Browserprofil und synchronisiert nicht zwischen Geräten.
+- Ein erfolgreicher Syntax- und Paketbuild ersetzt keine manuelle Browser- und Gerätetests.
+- Historische Trainingseinheiten bleiben beim Ergänzen des Geräte-Grundbestands unverändert.
