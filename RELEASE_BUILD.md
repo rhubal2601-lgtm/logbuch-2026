@@ -1,0 +1,1 @@
+Release build trigger for branch finish-logbook. See TESTBERICHT.md for validation scope.
