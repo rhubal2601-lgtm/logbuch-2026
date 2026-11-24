@@ -4,7 +4,7 @@
 
 ## Gestaltung
 
-Die Oberfläche folgt dem bereitgestellten logbook-Designentwurf: tiefschwarzer Hintergrund, anthrazitfarbene Karten, gelbe Akzente, einheitliche Formulare und Buttons sowie Icon-Navigation. Auf schmalen Displays bleibt die Navigation am unteren Rand; auf breiten Displays wechselt sie in eine kompakte Seitenleiste. Diagramme verwenden ein gemeinsames Raster, Verlauf und Marker.
+Die Oberfläche folgt dem bereitgestellten logbook-Designentwurf: tiefschwarzer Hintergrund, anthrazitfarbene Karten, gelbe Akzente, einheitliche Formulare und Buttons sowie Icon-Navigation. Die Hauptnavigation bleibt auf allen Displaygrößen am unteren Rand. Diagramme verwenden ein gemeinsames Raster, Verlauf und Marker.
 
 ## Starten
 
@@ -26,10 +26,10 @@ GitHub Pages kann die Dateien statisch bereitstellen: Repository-Einstellungen �
 
 ## Nutzung
 
-Die Navigation ist in fünf Bereiche gegliedert: **Home**, **Training**, **Analyse**, **Verlauf** und **Mehr**. Die Gerätebibliothek ist über **Mehr → Geräte verwalten** erreichbar.
+Die Navigation ist in fünf Bereiche gegliedert: **Home**, **Plan**, **Analyse**, **Verlauf** und **Mehr**. Die Gerätebibliothek ist über **Mehr → Geräte verwalten** erreichbar.
 
 1. Unter **Mehr** Profile anlegen oder wechseln, die Gerätebibliothek mit fünf Kategorien durchsuchen und bei Bedarf eigene Geräte sowie individuelle Einstellungen erfassen.
-2. Unter **Training** einen der fünf Split-Pläne als Vorlage hinzufügen oder eigene Pläne und Trainingstage erstellen.
+2. Unter **Plan** einen der fünf Split-Pläne als Vorlage hinzufügen oder eigene Pläne und Trainingstage erstellen.
 3. Ein Training starten, Sätze mit Gewicht, Wiederholungen, RIR und Satztyp protokollieren und die Einheit abschließen.
 4. **Analyse** berechnet Satzvolumen, Muskelgruppenvolumen, geschätzte 1RM-Rekorde und Übungsentwicklung ausschließlich aus abgeschlossenen protokollierten Sätzen.
 5. **Verlauf** zeigt Einheiten, Trainingskalender, Frequenz und das manuell gepflegte Körpergewichtsdiagramm.
