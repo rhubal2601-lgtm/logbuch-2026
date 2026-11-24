@@ -4,7 +4,7 @@ const KEY="logbook-data-v2";
 const LEGACY_KEY="logbook-data-v1";
 const DRAFT_KEY="logbook-active-draft";
 const draftKey=id=>`${DRAFT_KEY}-${id}`;
-const manufacturers=["PRIME Fitness","Hammer Strength","gym80","Cybex","Atlantis","Cross Axes Tech","Charged","Rogers","Paramount"];
+const manufacturers=["PRIME Fitness","Hammer Strength","gym80","Cybex","Atlantis","Cross Axes Tech","Charged","Rogers","Paramount","EliteFTS","Galaxy Sport","Westside"];
 const manufacturerCatalog={
  "gym80":["Negativbank","Seitheben","Kickback Maschine liegend","Seated Chest Fly Stack Loaded","Beinpresse","Reverse Hyperextension","Bauchbank","Dreidimensionale Multipresse","Donkey Calf Raise","No Bullshit Linie – Brustpresse","No Bullshit Linie – Schulterpresse"],
  "Hammer Strength":["Plate Loaded Lateral Raise","Plate Loaded Pullover","Ground Base Twist Combo","Half Rack"],
