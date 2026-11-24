@@ -1,0 +1,35 @@
+name: Build logbook release ZIP
+on:
+  push:
+    branches: ["finish-logbook"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate JavaScript and manifest
+        run: |
+          node --check app.js
+          node --check sw.js
+          node -e "JSON.parse(require('fs').readFileSync('manifest.webmanifest','utf8')); console.log('Manifest JSON OK')"
+      - name: Package release
+        run: |
+          mkdir -p dist
+          zip -j dist/logbook-final.zip index.html app.js sw.js manifest.webmanifest icon.svg README.md TESTBERICHT.md
+          unzip -t dist/logbook-final.zip
+      - name: Upload release ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: logbook-final
+          path: dist/logbook-final.zip
+          if-no-files-found: error
+          retention-days: 30
