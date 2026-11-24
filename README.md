@@ -26,9 +26,9 @@ GitHub Pages kann die Dateien statisch bereitstellen: Repository-Einstellungen �
 
 ## Nutzung
 
-Die Navigation ist in fünf Bereiche gegliedert: **Home**, **Training**, **Analyse**, **Verlauf** und **Verwaltung**.
+Die Navigation ist in fünf Bereiche gegliedert: **Home**, **Training**, **Analyse**, **Verlauf** und **Mehr**. Die Gerätebibliothek ist über **Mehr → Geräte verwalten** erreichbar.
 
-1. Unter **Verwaltung** Profile anlegen oder wechseln und bei Bedarf Geräte mit eigenen Einstellungsfeldern erfassen.
+1. Unter **Mehr** Profile anlegen oder wechseln, die Gerätebibliothek mit fünf Kategorien durchsuchen und bei Bedarf eigene Geräte sowie individuelle Einstellungen erfassen.
 2. Unter **Training** einen der fünf Split-Pläne als Vorlage hinzufügen oder eigene Pläne und Trainingstage erstellen.
 3. Ein Training starten, Sätze mit Gewicht, Wiederholungen, RIR und Satztyp protokollieren und die Einheit abschließen.
 4. **Analyse** berechnet Satzvolumen, Muskelgruppenvolumen, geschätzte 1RM-Rekorde und Übungsentwicklung ausschließlich aus abgeschlossenen protokollierten Sätzen.
@@ -38,9 +38,9 @@ Abgeschlossene Trainings werden als Datensatz gespeichert. Änderungen an späte
 
 ## Datenhaltung und Backups
 
-Daten bleiben auf dem Gerät und im jeweiligen Browserprofil. IndexedDB (`logbook-local`) ist der primäre Speicher. Beim Start wird der neueste bestätigte Stand aus IndexedDB und `localStorage` gewählt; fehlt ein IndexedDB-Stand, werden vorhandene lokale Daten übernommen. Änderungen werden unmittelbar an beide Speicher übergeben, wobei `localStorage` als lokale Wiederherstellungskopie dient. Ist IndexedDB nicht verfügbar, läuft die App mit `localStorage` weiter. Beim ersten Start mit einer älteren logbook-Version werden vorhandene Version-1-Daten in die profilbezogene Struktur übernommen; der alte Schlüssel bleibt erhalten.
+Daten bleiben auf dem Gerät und im jeweiligen Browserprofil. IndexedDB (`logbook-local`) ist der primäre Speicher. Beim Start wird der neueste bestätigte Stand aus IndexedDB und `localStorage` gewählt; fehlt ein IndexedDB-Stand, werden vorhandene lokale Daten übernommen. Änderungen werden zuerst in IndexedDB gespeichert; `localStorage` dient als lokale Wiederherstellungskopie und Fallback. Ist IndexedDB nicht verfügbar, läuft die App mit `localStorage` weiter. Beim ersten Start mit einer älteren logbook-Version werden vorhandene Version-1-Daten in die profilbezogene Struktur übernommen; der alte Schlüssel bleibt erhalten.
 
-Profile besitzen getrennte Pläne, Übungen, Gerätekonfigurationen, Gewichtsverläufe, Trainingseinheiten und aktive Trainingsentwürfe. Es gibt keine automatische Synchronisierung zwischen Geräten. Zum Gerätewechsel in **Verwaltung** ein JSON-Backup exportieren und am Zielgerät importieren. Der Import prüft Version, Profile, IDs und Trainingseinheiten, bevor er den aktuellen lokalen Datenbestand ersetzt.
+Profile besitzen getrennte Pläne, Übungen, Gerätekonfigurationen, Favoriten, Gewichtsverläufe, Trainingseinheiten und aktive Trainingsentwürfe. Die Geräte-Grundbibliothek enthält bei einer Neuinstallation 52 allgemeine Gerätetypen in den Kategorien Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör. Sie wird bei vorhandenen Profilen ergänzend eingespielt, ohne eigene Geräte zu überschreiben. Hersteller können gesucht und beim Anlegen eines eigenen Geräts frei ergänzt werden. Es gibt keine automatische Synchronisierung zwischen Geräten. Zum Gerätewechsel in **Verwaltung** ein JSON-Backup exportieren und am Zielgerät importieren. Der Import prüft Version, Profile, IDs und Trainingseinheiten, bevor er den aktuellen lokalen Datenbestand ersetzt.
 
 Browserdaten löschen, privater Modus, Geräteverlust oder Browserwechsel können lokale Daten entfernen. Regelmäßig ein JSON-Backup an einem selbst gewählten sicheren Ort ablegen.
 
