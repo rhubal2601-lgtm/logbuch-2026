@@ -1,4 +1,4 @@
-const CACHE = "logbook-cache-v8";
+const CACHE = "logbook-cache-v9";
 const CORE = ["./", "./index.html", "./app.js", "./manifest.webmanifest", "./icon.svg"];
 
 self.addEventListener("install", event => {
