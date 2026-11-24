@@ -2,46 +2,43 @@
 
 Stand: 24.11.2026
 
-## Aktueller Repository-Stand
+## Aktueller Stand
 
-Geprüfter Branch: `main`
+- Die App ist als responsive, lokal gespeicherte PWA angelegt.
+- Die Hauptnavigation besteht aus Home, Plan, Analyse, Verlauf und Mehr.
+- Plan bündelt Trainingspläne, Übungsbibliothek und aktive Einheit.
+- Mehr bündelt Profile, Gerätebibliothek, Backups und Darstellungseinstellungen.
+- Die Gerätebibliothek ist studio- und herstellerunabhängig. Sie enthält mehr als 170 allgemeine Gerätetypen in fünf Kategorien; Hersteller, Modelle und individuelle Geräteeinstellungen sind frei ergänzbar.
+- Die Gerätebibliothek wird als zentrale Quelle für die Geräteauswahl in Trainingsplänen verwendet.
+- Vorhandene Geräte- und Trainingsdaten bleiben bei der Ergänzung der Grundbibliothek erhalten; abgeschlossene Trainingseinheiten werden als historische Datensätze behandelt.
+- Die Release-Prüfung validiert JavaScript-Syntax, Manifest, Pflichtdateien, Geräte-Grunddaten und das erstellte ZIP-Paket.
 
-- Die Geräte-Grunddatenbank enthält 184 allgemeine Gerätetypen in fünf Kategorien (24 Freihantel-, 80 Maschinen-, 26 Kabelzug-, 19 Körpergewichts- und 35 Zubehör-Einträge): Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör.
-- Die Herstellerliste enthält 63 Marken-/Herstellereinträge im Quellcode; eigene Hersteller- und Modellangaben bleiben möglich.
-- Der Grundbestand wird beim Normalisieren vorhandener Profile ergänzt, ohne Einträge mit bereits vorhandenen IDs zu duplizieren.
-- Die Gerätebibliothek besitzt eine Kachel-Startansicht, Kategorie-/Suchlisten, Favoriten und eine separate Detailansicht.
-- Die Kategorieauswahl initialisiert ihren Zustand explizit; beim Öffnen einer Kategorie wird ein vorheriger Suchfilter zurückgesetzt.
-- IndexedDB wird als primärer Speicher verwendet; localStorage bleibt Wiederherstellungskopie und Fallback.
-- Der Service-Worker-Cache wurde auf `logbook-cache-v4` angehoben, damit zuvor zwischengespeicherte App-Dateien beim nächsten erfolgreichen Laden ersetzt werden.
-- Ein GitHub-Actions-Workflow unter `.github/workflows/release.yml` prüft Quellcode und Manifest, kontrolliert Mindestbestände der Geräte- und Herstellerdaten und erstellt ein ZIP-Artefakt.
+## Automatisierte Prüfungen
 
-## Automatisierte Prüfungen im Release-Workflow
-
-Der Workflow wird bei Pushes auf `main` und manuell über GitHub Actions gestartet. Er führt folgende Schritte aus:
+Der Workflow `Logbook Release Build` läuft bei Pushes auf `main` und manuell über GitHub Actions. Er prüft:
 
 - `node --check app.js`
 - `node --check sw.js`
-- Manifest-JSON-Prüfung
-- Prüfung erforderlicher Projektdateien
-- Mindestbestandsprüfung für Geräte und Hersteller
-- Erstellung von `logbook-release.zip`
-- ZIP-Integritätsprüfung
+- Manifest-JSON
+- erforderliche Projektdateien
+- mindestens 170 allgemeine Gerätevorlagen
+- mindestens 15 Hersteller-Schnellvorschläge
+- Erstellung und Integrität von `logbook-release.zip`
 
-**Wichtig:** Diese Prüfungen werden erst dann als bestanden gewertet, wenn der Workflow in GitHub Actions erfolgreich abgeschlossen wurde.
+Ein erfolgreicher Workflow bestätigt diese automatisierten Prüfungen, aber keine vollständige Bedienbarkeit in jedem Browser.
 
-## Noch nicht tatsächlich geprüft
+## Noch nicht physisch bzw. manuell geprüft
 
-- Interaktive Bedienung in einem echten Browser.
-- Tatsächliche IndexedDB-Persistenz nach Browserneustart und bei blockiertem localStorage.
-- JSON-Dateidialoge und Wiederherstellung echter Nutzerdaten.
-- Service-Worker-Offlinebetrieb nach echtem Neustart.
+- Interaktive Bedienung in Safari, Chrome und Firefox.
+- IndexedDB-Persistenz nach Browserneustart und Wiederherstellung aus JSON-Backup.
+- Offlinebetrieb nach echtem Neustart.
 - PWA-Installation und Bedienung auf iPhone, iPad und Android.
 - Responsive Darstellung auf physischen Geräten.
-- Visuelle Übereinstimmung mit sämtlichen ursprünglichen Designreferenzen.
+- Vollständige Ende-zu-Ende-Prüfung aller Trainingsabläufe mit realen Nutzerdaten.
 
 ## Hinweise vor dem produktiven Einsatz
 
 - Vor dem ersten Update auf bestehende Nutzerdaten ein JSON-Backup exportieren.
-- Die App speichert lokal pro Browserprofil und synchronisiert nicht zwischen Geräten.
+- Daten bleiben lokal pro Browserprofil; es gibt keine automatische Synchronisierung zwischen Geräten.
+- Browserdaten löschen, privater Modus oder Geräteverlust können lokale Daten entfernen.
 - Ein erfolgreicher Syntax- und Paketbuild ersetzt keine manuellen Browser- und Gerätetests.
-- Historische Trainingseinheiten sollen beim Ergänzen des Geräte-Grundbestands unverändert bleiben.
