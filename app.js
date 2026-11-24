@@ -4,7 +4,7 @@ const KEY="logbook-data-v2";
 const LEGACY_KEY="logbook-data-v1";
 const DRAFT_KEY="logbook-active-draft";
 const draftKey=id=>`${DRAFT_KEY}-${id}`;
-const manufacturers=["Life Fitness","Technogym","Matrix","Precor","Panatta","Nautilus","Hammer Strength","gym80","Cybex","Atlantis","Prime Fitness","Hoist","Arsenal Strength","Eleiko","Rogue","Watson","Body-Solid","Star Trac","Keiser","Technogym","Freemotion","Impulse","Other"];
+const manufacturers=["Life Fitness","Technogym","Matrix","Precor","Panatta","Nautilus","Hammer Strength","gym80","Cybex","Atlantis","Prime Fitness","Hoist","Arsenal Strength","Eleiko","Rogue","Watson","Body-Solid","Star Trac","Keiser","Freemotion","Impulse","Other"];
 const manufacturerCatalog={};
 const equipmentModels=["Brustpresse","Schrägbankpresse","Kabelzugstation","Latzug","Ruderzug","Brustgestütztes Rudergerät","Beinpresse","Hackenschmidt","Pendulum Squat","Beinstrecker","Beinbeuger sitzend","Beinbeuger liegend","Hip-Thrust-Maschine","Abduktionsmaschine","Adduktionsmaschine","Schulterpresse","Seithebemaschine","Reverse Butterfly","Bizepscurlmaschine","Trizepsmaschine","Wadenhebemaschine","Bauchmaschine","Smith Machine","Multipresse","Power Rack","Langhantel","Kurzhantelbank","Kabelturm","Functional Trainer","Laufband"];
 const muscles=["Alle","Brust","Rücken","Schultern","Bizeps","Trizeps","Quadrizeps","Beinbeuger","Gesäß","Adduktoren","Waden","Bauch","Unterarme"];
