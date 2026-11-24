@@ -38,7 +38,7 @@ jobs:
           test -s README.md
           test -s TESTBERICHT.md
 
-      - name: Check seeded equipment and manufacturers
+      - name: Check DASGYM inventory and equipment templates
         run: |
           node <<'NODE'
           const fs = require('fs');
@@ -46,12 +46,15 @@ jobs:
           const base = app.match(/const baseEquipment=\[([\s\S]*?)\]\.map\(/);
           const extra = app.match(/const expandedEquipment=\[([\s\S]*?)\]\.map\(/);
           const makers = app.match(/const manufacturers=\[([\s\S]*?)\];/);
-          if (!base || !extra || !makers) throw new Error('Seed data definitions missing');
+          const gym = app.match(/const dasgymEquipment=\[([\s\S]*?)\]\.map\(/);
+          if (!base || !extra || !makers || !gym) throw new Error('Equipment data definitions missing');
           const equipmentCount = (base[1].match(/\["/g) || []).length + (extra[1].match(/\["/g) || []).length;
           const makerCount = (makers[1].match(/"/g) || []).length / 2;
-          if (equipmentCount < 170) throw new Error('Expected at least 170 equipment entries; found ' + equipmentCount);
-          if (makerCount < 60) throw new Error('Expected at least 60 manufacturer entries; found ' + makerCount);
-          console.log('Seed data OK: ' + equipmentCount + ' equipment entries, ' + makerCount + ' manufacturer entries');
+          const gymCount = (gym[1].match(/\["/g) || []).length;
+          if (equipmentCount < 170) throw new Error('Expected at least 170 generic equipment templates; found ' + equipmentCount);
+          if (makerCount < 9) throw new Error('Expected at least 9 publicly named DASGYM manufacturers; found ' + makerCount);
+          if (gymCount < 20) throw new Error('Expected at least 20 documented DASGYM equipment types; found ' + gymCount);
+          console.log('DASGYM seed OK: ' + gymCount + ' verified equipment types, ' + makerCount + ' named manufacturers, ' + equipmentCount + ' generic templates');
           NODE
 
       - name: Create release ZIP
