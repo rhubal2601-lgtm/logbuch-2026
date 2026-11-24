@@ -79,7 +79,7 @@ function mergeBaseEquipment(list){
  const ids=new Set(current.map(e=>e.id));
  const verified=dasgymEquipment.filter(e=>!ids.has(e.id)).map(e=>({...e,settings:[]}));
  const templates=baseEquipment.filter(e=>!ids.has(e.id)).map(e=>({...e,settings:[],catalogOnly:true,dasgymVerified:false}));
- return [...verified,...current.map(e=>({...e,dasgymVerified:e.dasgymVerified===true,catalogOnly:e.catalogOnly===true})),...templates];
+ return [...verified,...current.map(e=>({...e,dasgymVerified:e.dasgymVerified===true,catalogOnly:e.catalogOnly===true||(e.isBase===true&&!e.dasgymVerified)})),...templates];
 }
 const uid=()=>Math.random().toString(36).slice(2,10);
 const dateISO=()=>new Date().toISOString();
