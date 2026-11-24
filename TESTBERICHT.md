@@ -2,26 +2,33 @@
 
 Stand: 24.11.2026
 
-## In dieser Revision umgesetzt
+## Aktueller Repository-Stand
 
-- Geräte-Grundbestand mit 52 allgemeinen Gerätetypen in fünf Kategorien ergänzt: Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör.
-- Grundbestand wird bei Neuinstallation angelegt und bei bestehenden Profilen rückwärtskompatibel ergänzt. Vorhandene individuelle Geräte bleiben erhalten; bestehende Einträge ohne Kategorie werden unter „Sonstiges Zubehör“ einsortiert.
-- Herstellerliste erweitert und Hersteller-Suche ergänzt. Freie Hersteller- und Modellangaben bleiben möglich.
-- Gerätebibliothek auf Kachel-Startansicht, Kategorie-/Suchliste, Favoriten und separate Detailansicht umgestellt.
-- Individuelle Geräteeinstellungen, profilbezogene Favoriten und die optionale Übungszuordnung bleiben Bestandteil der bestehenden Datenstruktur.
-- Speicherreihenfolge angepasst: IndexedDB wird zuerst beschrieben; localStorage dient als Wiederherstellungskopie und Fallback.
-- GitHub Actions Workflow ergänzt, der JavaScript-Syntax, Manifest-JSON und ZIP-Integrität prüft und ein Release-ZIP als Build-Artefakt bereitstellt.
+Geprüfter Branch: `main`
 
-## Noch automatisiert zu bestätigen
+- Die Geräte-Grunddatenbank enthält 52 allgemeine Gerätetypen in fünf Kategorien: Freihanteln, Maschinen, Kabelzüge, Körpergewicht und Sonstiges Zubehör.
+- Die Herstellerliste ist im Quellcode hinterlegt; eigene Hersteller- und Modellangaben bleiben möglich.
+- Der Grundbestand wird beim Normalisieren vorhandener Profile ergänzt, ohne Einträge mit bereits vorhandenen IDs zu duplizieren.
+- Die Gerätebibliothek besitzt eine Kachel-Startansicht, Kategorie-/Suchlisten, Favoriten und eine separate Detailansicht.
+- IndexedDB wird als primärer Speicher verwendet; localStorage bleibt Wiederherstellungskopie und Fallback.
+- Der Service-Worker-Cache wurde auf `logbook-cache-v4` angehoben, damit zuvor zwischengespeicherte App-Dateien beim nächsten erfolgreichen Laden ersetzt werden.
+- Ein GitHub-Actions-Workflow unter `.github/workflows/release.yml` prüft Quellcode und Manifest, kontrolliert Mindestbestände der Geräte- und Herstellerdaten und erstellt ein ZIP-Artefakt.
 
-Der GitHub-Actions-Build wird durch den Push auf den Branch `finish-logbook` gestartet. Erst nach erfolgreichem Workflow gelten die folgenden Prüfungen als bestanden:
+## Automatisierte Prüfungen im Release-Workflow
+
+Der Workflow wird bei Pushes auf `main` und manuell über GitHub Actions gestartet. Er führt folgende Schritte aus:
 
 - `node --check app.js`
 - `node --check sw.js`
-- Manifest als JSON lesbar
-- ZIP-Erstellung und ZIP-Integrität
+- Manifest-JSON-Prüfung
+- Prüfung erforderlicher Projektdateien
+- Mindestbestandsprüfung für Geräte und Hersteller
+- Erstellung von `logbook-release.zip`
+- ZIP-Integritätsprüfung
 
-## Nicht tatsächlich geprüft
+**Wichtig:** Diese Prüfungen werden erst dann als bestanden gewertet, wenn der Workflow in GitHub Actions erfolgreich abgeschlossen wurde.
+
+## Noch nicht tatsächlich geprüft
 
 - Interaktive Bedienung in einem echten Browser.
 - Tatsächliche IndexedDB-Persistenz nach Browserneustart und bei blockiertem localStorage.
@@ -35,5 +42,5 @@ Der GitHub-Actions-Build wird durch den Push auf den Branch `finish-logbook` ges
 
 - Vor dem ersten Update auf bestehende Nutzerdaten ein JSON-Backup exportieren.
 - Die App speichert lokal pro Browserprofil und synchronisiert nicht zwischen Geräten.
-- Ein erfolgreicher Syntax- und Paketbuild ersetzt keine manuelle Browser- und Gerätetests.
-- Historische Trainingseinheiten bleiben beim Ergänzen des Geräte-Grundbestands unverändert.
+- Ein erfolgreicher Syntax- und Paketbuild ersetzt keine manuellen Browser- und Gerätetests.
+- Historische Trainingseinheiten sollen beim Ergänzen des Geräte-Grundbestands unverändert bleiben.
